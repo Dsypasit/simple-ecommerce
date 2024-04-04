@@ -8,7 +8,7 @@ import (
 type Server struct {
 	Hostname        string
 	Port            int
-	ShutdownTimeout int32
+	ShutdownTimeout int
 }
 
 type FeatureFlag struct{}

@@ -47,8 +47,8 @@ func TestIntEnv(t *testing.T) {
 	tests := []struct {
 		name       string
 		key        string
-		defaultVal int
 		osVal      string
+		defaultVal int
 		want       int
 	}{
 		{
