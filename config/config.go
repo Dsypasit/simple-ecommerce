@@ -6,8 +6,9 @@ import (
 )
 
 type Server struct {
-	Hostname string
-	Port     int
+	Hostname        string
+	Port            int
+	ShutdownTimeout int32
 }
 
 type FeatureFlag struct{}
@@ -19,15 +20,17 @@ type Config struct {
 }
 
 const (
-	keyHostname = "HOSTNAME"
-	keyPort     = "PORT"
+	keyHostname        = "HOSTNAME"
+	keyPort            = "PORT"
+	keyShutdownTimeout = "SHUTDOWN_TIMEOUT"
 
 	keyDBConnection = "DB_CONNECTION"
 )
 
 const (
-	defaultHostname = ""
-	defaultPort     = 8080
+	defaultHostname        = ""
+	defaultPort            = 8080
+	defaultShutdownTimeout = 10
 
 	defaultDBConnection = "postgresql://postgres:postgres@localhost:5432/postgres?sslmode=disable"
 )
@@ -35,8 +38,9 @@ const (
 func New() Config {
 	return Config{
 		Server: Server{
-			Hostname: envString(keyHostname, defaultHostname),
-			Port:     envInt(keyPort, defaultPort),
+			Hostname:        envString(keyHostname, defaultHostname),
+			Port:            envInt(keyPort, defaultPort),
+			ShutdownTimeout: envInt(keyShutdownTimeout, defaultShutdownTimeout),
 		},
 		FeatureFlag:  FeatureFlag{},
 		DBConnection: envString(keyDBConnection, defaultDBConnection),
